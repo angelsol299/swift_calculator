@@ -1,21 +1,23 @@
 //
 //  ContentView.swift
-//  Calculator
+//  SalesTax-SwiftUI
 //
-//  Created by Angel Osoria on 2023-02-13.
+//  Created by Angel Osoria on 2023-02-09.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
         VStack {
+            
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+            Text("This is a test")
+        }.padding()
+        
     }
 }
 
