@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var accumulatedValue = "0"
+    //@State var accumulatedValue = "0"
+    
+    @State var calculatedValue = "0"
     
     var body: some View {
         
@@ -17,6 +19,13 @@ struct ContentView: View {
         ZStack{
             
             Color.black.ignoresSafeArea(.all)
+            
+            HStack{
+                TextField("", text:$calculatedValue)
+                    .foregroundColor(.white)
+                    .font(.system(size: 60))
+            }.padding(.bottom, 150).padding(.leading, 300)
+            
             HStack{
             
                 Button("7"){}
