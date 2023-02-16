@@ -36,11 +36,6 @@ enum ButtonTypes:Hashable {
         }
     }
     
-   
-    
-    var isWide:Bool {
-        return self == .digit(0)
-    }
 }
 
 

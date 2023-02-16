@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalculatorButtonStyle: ButtonStyle {
     
-    var isWide: Bool = false
+    
     var size: CGFloat = 50
     var backgroundColor: Color
     
@@ -17,7 +17,7 @@ struct CalculatorButtonStyle: ButtonStyle {
         configuration
             .label.font(.system(size:32, weight:.medium))
             .frame(width:size, height:size)
-            .frame(maxWidth: isWide ? .infinity : size, alignment: .center)
+            .frame(maxWidth: size, alignment: .center)
             .background(backgroundColor)
             .foregroundColor(.white)
             .clipShape(Capsule())
@@ -31,7 +31,6 @@ struct ButtonStyle_Previews: PreviewProvider {
         
         Button(abutton.title){}
             .buttonStyle(CalculatorButtonStyle(
-                isWide:false,
                 size:100,
                 backgroundColor: abutton.backgroundColor ))
             .padding()

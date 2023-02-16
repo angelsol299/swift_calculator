@@ -13,8 +13,8 @@ import SwiftUI
 struct CalculatorView: View {
     
     @State var digitsAcc:[String] = []
-    @State var firstDigit:String = ""
-    @State var secondDigit:String = ""
+    @State var firstDigit:String = "0"
+    @State var secondDigit:String = "0"
     @State var firstResult: String = "0"
     
     @State var accOperation:[String] = []
@@ -27,7 +27,7 @@ struct CalculatorView: View {
             [.digit(7), .digit(8), .digit(9), .operation("/")],
             [.digit(4), .digit(5), .digit(6), .operation("x")],
             [.digit(1), .digit(2), .digit(3), .operation("-")],
-            [.allClear, .digit(0), .operation("=")]
+            [.allClear, .digit(0),.operation("+"), .operation("=")]
         ]
     }
     
@@ -45,12 +45,18 @@ struct CalculatorView: View {
                                case "1", "2", "3","4", "5", "6", "7", "8", "9", "0":
                                    digitsAcc.append(btn.title)
                                    finalResult = (digitsAcc.joined())
-                               case "/","x","-":
+                               case "/","x","-","+":
                                    if( btn.title == "x"){ oper = "*" }
                                    else{
                                        oper = btn.title
                                    }
-                                   firstDigit = digitsAcc.joined()
+                                    
+                                   
+                                   
+                                   if(firstDigit == "0"){
+                                       firstDigit = digitsAcc.joined()
+                                      
+                                   }
                                    digitsAcc = []
                                 
                                case "=":
@@ -64,24 +70,23 @@ struct CalculatorView: View {
                                        let more = finalCalc.expressionValue(with: nil, context: nil) as! Int
                                        
                                        finalResult = String(describing: more)
+                                       firstDigit = finalResult
+                                       
                                    } else {
                                        finalResult = "0"
                                    }
                                    
-                              print("first: ", firstDigit, "second: ", secondDigit)
-                                   
                                case "AC":
                                    digitsAcc = []
+                                   firstDigit = "0"
                                    finalResult = "0"
                                 default:
-                                   print("nada")
+                                   digitsAcc = []
+                                   finalResult = "0"
                                }
                                
-                               
-                              print(digitsAcc, oper)
                            }
-                               .buttonStyle(CalculatorButtonStyle(isWide: btn.isWide,
-                                                                  size: 80,
+                               .buttonStyle(CalculatorButtonStyle(size: 80,
                                                                   backgroundColor: btn.backgroundColor))
                        }
                    }
