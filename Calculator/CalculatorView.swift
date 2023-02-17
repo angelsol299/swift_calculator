@@ -13,11 +13,11 @@ import SwiftUI
 struct CalculatorView: View {
     
     @State var digitsAcc:[String] = []
-    @State var firstDigit:String = "0"
-    @State var secondDigit:String = "0"
-    @State var firstResult: String = "0"
+    @State var firstDigit:Float = 0
+    @State var secondDigit:Float = 0
+    @State var firstResult: Float = 0
     
-    @State var accOperation:[String] = []
+
     @State var oper:String = ""
     
     @State var finalResult:String! = "0"
@@ -53,24 +53,42 @@ struct CalculatorView: View {
                                     
                                    
                                    
-                                   if(firstDigit == "0"){
-                                       firstDigit = digitsAcc.joined()
+                                   if(firstDigit == 0){
+                                       let joinedFirstDigit =   digitsAcc.joined()
+                                       firstDigit =  (joinedFirstDigit as NSString).floatValue
+                                       
+                                     
                                       
                                    }
                                    digitsAcc = []
                                 
                                case "=":
-                                   secondDigit = digitsAcc.joined()
+                                   
+                                   let joinedSecondDigit =   digitsAcc.joined()
+                                   secondDigit =  (joinedSecondDigit as NSString).floatValue
                                    digitsAcc = []
                                    
-                                   if(firstDigit != "0"){
-                                       let previewRes = firstDigit + oper + secondDigit
-                                       let finalCalc = NSExpression(format:previewRes)
-                                       
-                                       let more = finalCalc.expressionValue(with: nil, context: nil) as! Int
-                                       
-                                       finalResult = String(describing: more)
-                                       firstDigit = finalResult
+                                   if(firstDigit != 0){
+                                        if(oper ==  "/"){
+                                            let prefinal = firstDigit / secondDigit
+                                            firstDigit = prefinal
+                                            finalResult = (prefinal as NSNumber).stringValue
+                                        }
+                                       if(oper ==  "*"){
+                                           let prefinal = firstDigit * secondDigit
+                                           firstDigit = prefinal
+                                           finalResult = (prefinal as NSNumber).stringValue
+                                       }
+                                       if(oper ==  "+"){
+                                           let prefinal = firstDigit + secondDigit
+                                           firstDigit = prefinal
+                                           finalResult = (prefinal as NSNumber).stringValue
+                                       }
+                                       if(oper ==  "-"){
+                                           let prefinal = firstDigit - secondDigit
+                                           firstDigit = prefinal
+                                           finalResult = (prefinal as NSNumber).stringValue
+                                       }
                                        
                                    } else {
                                        finalResult = "0"
@@ -78,7 +96,7 @@ struct CalculatorView: View {
                                    
                                case "AC":
                                    digitsAcc = []
-                                   firstDigit = "0"
+                                   firstDigit = 0
                                    finalResult = "0"
                                 default:
                                    digitsAcc = []
